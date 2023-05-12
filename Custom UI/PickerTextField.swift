@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
+class PickerTextField: UITextField, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     var options = [String]()
     var pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (3 * UIScreen.main.bounds.width / 5)))
     
@@ -81,5 +81,42 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     
     @objc func closeBarButtonItemTouchUpInside() {
         endEditing(true)
+    }
+}
+
+// Manage text editing
+extension PickerTextField {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+}
+
+// Manage text selection
+extension PickerTextField {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+    }
+}
+
+// Provide context menu
+extension PickerTextField {
+    func textField(_ textField: UITextField, editMenuForCharactersIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
+        return nil
+    }
+}
+
+// Customise edit menus
+extension PickerTextField {
+    func textField(_ textField: UITextField, willPresentEditMenuWith animator: UIEditMenuInteractionAnimating) {
+    }
+    
+    func textField(_ textField: UITextField, willDismissEditMenuWith animator: UIEditMenuInteractionAnimating) {
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class BarCodeScannerTextField: UITextField, AVCaptureMetadataOutputObjectsDelegate {
+class BarCodeScannerTextField: UITextField, UITextFieldDelegate, AVCaptureMetadataOutputObjectsDelegate {
     let cameraView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height / 2)))
     let captureSession = AVCaptureSession()
     
@@ -112,5 +112,42 @@ class BarCodeScannerTextField: UITextField, AVCaptureMetadataOutputObjectsDelega
         } else {
             endEditing(true)
         }
+    }
+}
+
+// Manage text editing
+extension BarCodeScannerTextField {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+}
+
+// Manage text selection
+extension BarCodeScannerTextField {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+    }
+}
+
+// Provide context menu
+extension BarCodeScannerTextField {
+    func textField(_ textField: UITextField, editMenuForCharactersIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
+        return nil
+    }
+}
+
+// Customise edit menus
+extension BarCodeScannerTextField {
+    func textField(_ textField: UITextField, willPresentEditMenuWith animator: UIEditMenuInteractionAnimating) {
+    }
+
+    func textField(_ textField: UITextField, willDismissEditMenuWith animator: UIEditMenuInteractionAnimating) {
     }
 }

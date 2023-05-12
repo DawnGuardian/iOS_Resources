@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DatePickerTextField: UITextField {
+class DatePickerTextField: UITextField, UITextFieldDelegate {
     var datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (3 * UIScreen.main.bounds.height / 5)))
     
     var selectedDate: Date {
@@ -54,5 +54,42 @@ class DatePickerTextField: UITextField {
     
     @objc func closeBarButtonItemTouchUpInside() {
         endEditing(true)
+    }
+}
+
+// Manage text editing
+extension DatePickerTextField {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+}
+
+// Manage text selection
+extension DatePickerTextField {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+    }
+}
+
+// Provide context menu
+extension DatePickerTextField {
+    func textField(_ textField: UITextField, editMenuForCharactersIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
+        return nil
+    }
+}
+
+// Customise edit menus
+extension DatePickerTextField {
+    func textField(_ textField: UITextField, willPresentEditMenuWith animator: UIEditMenuInteractionAnimating) {
+    }
+    
+    func textField(_ textField: UITextField, willDismissEditMenuWith animator: UIEditMenuInteractionAnimating) {
     }
 }
